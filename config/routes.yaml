@@ -1,3 +1,69 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_home:
+    path: /
+    controller: App\Controller\PageController::index
+
+app_contact:
+    path: /contact
+    controller: App\Controller\PageController::contact
+
+app_blog:
+    path: /blog
+    controller: App\Controller\PageController::blog
+
+app_about:
+    path: /about
+    controller: App\Controller\PageController::about
+
+app_service:
+    path: /service
+    controller: App\Controller\PageController::service
+
+app_single:
+    path: /single
+    controller: App\Controller\PageController::single
+
+app_guard:
+    path: /guard
+    controller: App\Controller\PageController::guard
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+#[Route('/admin_news/', name: 'news_index', methods: ['GET'])]
+news_index:
+    path: /admin_news/
+    controller: App\Controller\NewsController::index
+    methods: GET
+
+
+#[Route('/admin_news/new', name: 'news_new', methods: ['GET', 'POST'])]
+news_new:
+    path: /admin_news/new
+    controller: App\Controller\NewsController::new
+    methods: GET|POST
+
+
+#[Route('/admin_news/{id}', name: 'news_show', methods: ['GET'])]
+news_show:
+    path: /admin_news/{id}
+    controller: App\Controller\NewsController::show
+    methods: GET
+
+
+#[Route('/admin_news/{id}/edit', name: 'news_edit', methods: ['GET', 'POST'])]
+news_edit:
+    path: /admin_news/{id}/edit
+    controller: App\Controller\NewsController::edit
+    methods: GET|POST
+
+
+#[Route('/admin_news/{id}', name: 'news_delete', methods: ['POST'])]
+news_delete:
+    path: /admin_news/{id}
+    controller: App\Controller\NewsController::delete
+    methods: POST
