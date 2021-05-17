@@ -2,6 +2,7 @@
 .container-fluid.header-video video {
     position:relative;
     z-index:0;
+    width: 100%;
 }
 .overlay {
     position:absolute;

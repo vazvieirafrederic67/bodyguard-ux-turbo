@@ -2,15 +2,20 @@
 
 namespace App\Controller;
 
+use App\Repository\NewsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    public function index(): Response
+    public function index(NewsRepository $newsRepository): Response
     {
-        return $this->render('page/index.html.twig');
+
+        return $this->render('page/index.html.twig',[
+                'news' => $newsRepository->findByDateThree()
+                ]
+        );
     }
 
     public function contact(): Response
@@ -33,13 +38,17 @@ class PageController extends AbstractController
         return $this->render('page/service.html.twig');
     }
 
-    public function single(): Response
+    public function single(NewsRepository $newsRepository): Response
     {
-        return $this->render('page/single.html.twig');
+        return $this->render('page/single.html.twig',[
+            'news' => $newsRepository->findByDate()
+            ]);
     }
 
-    public function blog(): Response
+    public function blog(NewsRepository $newsRepository): Response
     {
-        return $this->render('page/blog.html.twig');
+        return $this->render('page/blog.html.twig',[
+            'news' => $newsRepository->findByDateSix()
+            ]);
     }
 }

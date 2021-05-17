@@ -66,7 +66,7 @@
             Your browser does not support HTML video.
         </video>
 
-        <nav class="overlay navbar navbar-expand-lg bg-none navbar-dark py-0">
+        <nav data-controller="navbar" class="overlay navbar navbar-expand-lg bg-none navbar-dark py-0">
             <a href="" class="navbar-brand d-block d-lg-none">
                 <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
             </a>
@@ -74,7 +74,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav m-auto py-4">
+                <div class="navbar-nav py-4">
                     <a href="{{ path('app_home') }}" class="nav-item nav-link active">Home</a>
                     <a href="{{ path('app_about') }}" class="nav-item nav-link">About</a>
                     <a href="{{ path('app_service') }}" class="nav-item nav-link">Services</a>
@@ -313,26 +313,26 @@
 
 
     <!-- Facts Start -->
-    <div class="container-fluid bg-primary my-5 py-5 text-center">
+    <div data-controller="hello" class="container-fluid bg-primary my-5 py-5 text-center">
         <div class="row pt-5">
             <div class="col-lg-3 col-sm-6 mb-5">
                 <h5 class="fa fa-user-shield mb-4 d-inline-flex align-items-center justify-content-center border rounded-circle text-white" style="width: 50px; height: 50px;"></h5>
-                <h4 class="display-4 text-white mb-3" data-toggle="counter-up">250</h4>
+                <h4 class="display-4 text-white mb-3" data-hello-target="counter-up">250</h4>
                 <h6 class="text-white m-0">Our Staff</h6>
             </div>
             <div class="col-lg-3 col-sm-6 mb-5">
                 <h5 class="fa fa-users mb-4 d-inline-flex align-items-center justify-content-center border rounded-circle text-white" style="width: 50px; height: 50px;"></h5>
-                <h4 class="display-4 text-white mb-3" data-toggle="counter-up">1500</h4>
+                <h4 class="display-4 text-white mb-3" data-hello-target="counter-up">1500</h4>
                 <h6 class="text-white m-0">Happy Client</h6>
             </div>
             <div class="col-lg-3 col-sm-6 mb-5">
                 <h5 class="fa fa-shield-alt mb-4 d-inline-flex align-items-center justify-content-center border rounded-circle text-white" style="width: 50px; height: 50px;"></h5>
-                <h4 class="display-4 text-white mb-3" data-toggle="counter-up">10000</h4>
+                <h4 class="display-4 text-white mb-3" data-hello-target="counter-up">10000</h4>
                 <h6 class="text-white m-0">Project Complete</h6>
             </div>
             <div class="col-lg-3 col-sm-6 mb-5">
                 <h5 class="fa fa-award mb-4 d-inline-flex align-items-center justify-content-center border rounded-circle text-white" style="width: 50px; height: 50px;"></h5>
-                <h4 class="display-4 text-white mb-3" data-toggle="counter-up">25</h4>
+                <h4 class="display-4 text-white mb-3" data-hello-target="counter-up">25</h4>
                 <h6 class="text-white m-0">Award Winning</h6>
             </div>
         </div>
@@ -516,7 +516,7 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-fluid my-5 p-0 py-5" style="background: #f6f6f6;">
+    <div data-controller="testimonial" class="container-fluid my-5 p-0 py-5" style="background: #f6f6f6;">
         <div class="container p-0 py-5">
             <div class="d-flex flex-column text-center mb-5">
                 <h5 class="text-primary mb-3">Testimonial</h5>
@@ -580,61 +580,39 @@
     <!-- Blog Start -->
     <div class="container pt-5">
         <div class="d-flex flex-column text-center mb-5">
-            <h5 class="text-primary mb-3">Recent Blog</h5>
-            <h1 class="m-0">Latest From Our Blog</h1>
+            <h5 class="text-primary mb-3">News</h5>
+            <h1 class="m-0">Latest From News</h1>
         </div>
+
         <div class="row pb-3">
+
+            {% for new in news %}
+
             <div class="col-lg-4 mb-4">
                 <div class="card mb-2 p-3">
-                    <img class="card-img-top" src="img/blog-1.jpg" alt="">
-                    <div class="card-body bg-secondary d-flex align-items-center p-0">
-                        <h6 class="card-title text-white text-truncate m-0 ml-3">Diam amet eos at no eos</h6>
-                        <a href="" class="fa fa-link d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white text-decoration-none m-0 ml-auto" style="width: 45px; height: 45px;"></a>
+                    {% if new.image is defined %}
+                        <div style="height:200px; width:100%;background-repeat: no-repeat; background-size:cover;background-image:url('uploads/images/{{new.image}}');" class="card-img-top"></div>
+                    {% endif %}
+                    <div class="card-body bg-secondary d-flex align-items-center p-1">
+                        {% if new.title is defined %}
+                            <h4 style="font-size:16px!important;" class="card-title text-white m-0 ml-3">{{new.title}}</h4>
+                        {% endif %}
                     </div>
-                    <div class="card-footer py-3 px-4">
+                    <div style="height:300px" class="card-footer py-3 px-4">
                         <div class="d-flex mb-2">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                            {% if new.subtitle is defined %}
+                                <h5 style="font-size:14px!important;" class="card-title text-black m-0 ml-2">{{new.subtitle}}</h5>
+                            {% endif %}
                         </div>
-                        <p class="m-0">Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo et.</p>
+                        {% if new.text is defined %}
+                            <div style="font-size:14px!important;" class="m-0 ml-4">{% if new.text|length < 300 %} {{ new.text|raw }} {% else %} {{ new.text|slice(0, 300)|raw }} {% endif %}</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card mb-2 p-3">
-                    <img class="card-img-top" src="img/blog-2.jpg" alt="">
-                    <div class="card-body bg-secondary d-flex align-items-center p-0">
-                        <h6 class="card-title text-white text-truncate m-0 ml-3">Diam amet eos at no eos</h6>
-                        <a href="" class="fa fa-link d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white text-decoration-none m-0 ml-auto" style="width: 45px; height: 45px;"></a>
-                    </div>
-                    <div class="card-footer py-3 px-4">
-                        <div class="d-flex mb-2">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                        </div>
-                        <p class="m-0">Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo et.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card mb-2 p-3">
-                    <img class="card-img-top" src="img/blog-3.jpg" alt="">
-                    <div class="card-body bg-secondary d-flex align-items-center p-0">
-                        <h6 class="card-title text-white text-truncate m-0 ml-3">Diam amet eos at no eos</h6>
-                        <a href="" class="fa fa-link d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white text-decoration-none m-0 ml-auto" style="width: 45px; height: 45px;"></a>
-                    </div>
-                    <div class="card-footer py-3 px-4">
-                        <div class="d-flex mb-2">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                        </div>
-                        <p class="m-0">Diam amet eos at no eos sit lorem, amet rebum ipsum clita stet, diam sea est magna diam eos, rebum sit vero stet ipsum justo et.</p>
-                    </div>
-                </div>
-            </div>
+
+            {% endfor %}
+
         </div>
     </div>
     <!-- Blog End -->

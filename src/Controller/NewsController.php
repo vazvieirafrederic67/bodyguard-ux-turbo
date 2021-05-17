@@ -67,7 +67,10 @@ class NewsController extends AbstractController
         }
         if ($form->isSubmitted() && !$form->isValid()) {
 
-            dd($form->getData());
+            return $this->render('news/new.html.twig', [
+                'news' => $news,
+                'form' => $form->createView(),
+            ]);
         }
 
         return $this->render('news/new.html.twig', [

@@ -1,4 +1,11 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+<div data-controller="ckeditor" class="container">
+
+    {{ form_start(form) }}
+
+    {{ form_widget(form, {'attr': { 'style' : 'width:100%'} }) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    
+    {{ form_end(form) }}
+
+</div>
+
