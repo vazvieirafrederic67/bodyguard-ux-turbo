@@ -9864,3 +9864,7 @@ h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.hidden {
+  display: none;
+}
