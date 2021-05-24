@@ -32,31 +32,30 @@ class NewsRepository extends ServiceEntityRepository
         ;
     }
 
-     /**
-      * @return News[] Returns an array of News objects
-      */
-      public function findByDateSix()
-      {
-          return $this->createQueryBuilder('n')
-              ->orderBy('n.createdAt', 'DESC')
-              ->setMaxResults(6)
-              ->getQuery()
-              ->getResult()
-          ;
-      }
+    /**
+     * @return News[] Returns an array of News objects
+    */
+    public function findByDateSix()
+    {
+        return $this->createQueryBuilder('n')
+            ->orderBy('n.createdAt', 'DESC')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-
-     /**
-      * @return News[] Returns an array of News objects
-      */
-      public function findByDate()
-      {
-          return $this->createQueryBuilder('n')
-              ->orderBy('n.createdAt', 'DESC')
-              ->getQuery()
-              ->getResult()
-          ;
-      }
+    /**
+     * @return News[] Returns an array of News objects
+    */
+    public function findByDate()
+    {
+        return $this->createQueryBuilder('n')
+            ->orderBy('n.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     /*
     public function findOneBySomeField($value): ?News

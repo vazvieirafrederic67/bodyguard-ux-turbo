@@ -6,10 +6,6 @@ app_contact:
     path: /contact
     controller: App\Controller\PageController::contact
 
-app_blog:
-    path: /blog
-    controller: App\Controller\PageController::blog
-
 app_about:
     path: /about
     controller: App\Controller\PageController::about
@@ -22,17 +18,13 @@ app_single:
     path: /single
     controller: App\Controller\PageController::single
 
-app_guard:
-    path: /guard
-    controller: App\Controller\PageController::guard
-
 app_login:
     path: /login
     controller: App\Controller\SecurityController::login
 
-app_register:
-    path: /register
-    controller: App\Controller\RegistrationController::register
+# app_register:
+#    path: /register
+#    controller: App\Controller\RegistrationController::register
 
 #[Route('/admin_news/', name: 'news_index', methods: ['GET'])]
 news_index:
