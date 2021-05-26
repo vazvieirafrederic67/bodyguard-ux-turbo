@@ -58,19 +58,19 @@
                     {{ form_start(form) }}
                    
                         <div class="control-group">
-                            {{ form_row(form.name, {'attr': { 'class': 'form-control', 'id': 'name', 'placeholder': 'Your Name'  }}) }}
+                            {{ form_row(form.name, {'attr': { 'class': 'form-control', 'placeholder': 'Your Name'  }}) }}
                         </div>
 
                         <div class="control-group">
-                            {{ form_row(form.mail, {'attr': { 'class': 'form-control', 'id': 'mail', 'placeholder': 'Your Adresse Email'  }}) }}
+                            {{ form_row(form.mail, {'attr': { 'class': 'form-control', 'placeholder': 'Your Adresse Email'  }}) }}
                         </div>
 
                         <div class="control-group">
-                            {{ form_row(form.subject, {'attr': { 'class': 'form-control', 'id': 'subject', 'placeholder': 'Your Subject'  }}) }}
+                            {{ form_row(form.subject, {'attr': { 'class': 'form-control', 'placeholder': 'Your Subject'  }}) }}
                         </div>
 
                         <div class="control-group">
-                            {{ form_row(form.message, {'attr': { 'class': 'form-control', 'id': 'message', 'placeholder': 'Your Message'  }}) }}
+                            {{ form_row(form.message, {'attr': { 'class': 'form-control', 'placeholder': 'Your Message'  }}) }}
                         </div>
                         <div>
                             <button class="btn btn-primary" type="submit" id="sendMessageButton">Send Message</button>
