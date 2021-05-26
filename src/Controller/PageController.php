@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\SendMailService;
+use Symfony\Component\Form\Forms;
 use App\Repository\NewsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Turbo\Stream\TurboStreamResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Forms;
 
 
 class PageController extends AbstractController
@@ -28,19 +30,53 @@ class PageController extends AbstractController
         );
     }
 
-    public function contact(Request $request): Response
+    public function contact(SendMailService $mailService, Request $request): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
+        $blankForm = clone $form;
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contact = $form->getData();
+            
+            $contactName = $form->get('name')->getData();
+
+
+            if (TurboStreamResponse::STREAM_FORMAT === $request->getPreferredFormat()) {
+                
+                $formSend = $form->getData();
+                $mailService->sendMailContact($contact);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($contact);
+                $entityManager->flush();
+                
+                return $this->render('contact/_success_contact_form.stream.html.twig', [
+                    'contactName' => $contactName,
+                    'form' => $blankForm->createView(),
+                ], new TurboStreamResponse());
+            }
+
+            $formSend = $form->getData();
+            $mailService->sendMailContact($contact);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
+           
+            $this->addFlash('success', $formSend->getFirstname().', your message has been sent!');
 
-            return $this->redirectToRoute('app_contact');
+            return $this->redirectToRoute('app_contact', [], Response::HTTP_SEE_OTHER);
+
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+
+            $content = $this->renderView('pages/contact.html.twig',[
+                'form' => $form->createView(), 
+            ]);
+
+            return new Response($content, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return $this->render('page/contact.html.twig', [
